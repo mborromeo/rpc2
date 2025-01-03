@@ -1,4 +1,4 @@
-module github.com/cenkalti/rpc2
+module github.com/mborromeo/rpc2
 
 go 1.20
 
