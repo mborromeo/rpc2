@@ -31,6 +31,9 @@ type Codec interface {
 	// WriteResponse must be safe for concurrent use by multiple goroutines.
 	WriteResponse(*Response, interface{}) error
 
+	// Conn returns the underlying connection.
+	Conn() io.ReadWriteCloser
+
 	// Close is called when client/server finished with the connection.
 	Close() error
 }
@@ -118,6 +121,10 @@ func (c *gobCodec) WriteResponse(r *Response, body interface{}) (err error) {
 		return
 	}
 	return c.encBuf.Flush()
+}
+
+func (c *gobCodec) Conn() io.ReadWriteCloser {
+	return c.rwc
 }
 
 func (c *gobCodec) Close() error {

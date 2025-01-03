@@ -362,3 +362,8 @@ func (c *Client) Notify(method string, args interface{}) error {
 	c.request.Method = method
 	return c.codec.WriteRequest(&c.request, args)
 }
+
+// Conn returns the underlying connection.
+func (c *Client) Conn() io.ReadWriteCloser {
+	return c.codec.Conn()
+}
